@@ -32,6 +32,11 @@ public class CacheController {
 	@Autowired
 	private RedissonClient redissonClient;
 
+	/**
+	 * 可用作分布式锁
+	 *
+	 * @return
+	 */
 	@GetMapping("/lock")
 	public String lock() {
 		RLock lock = redissonClient.getLock("anyLock");
