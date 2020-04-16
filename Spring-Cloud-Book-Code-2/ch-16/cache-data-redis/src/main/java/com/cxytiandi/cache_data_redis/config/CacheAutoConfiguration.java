@@ -11,15 +11,20 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CacheAutoConfiguration extends CachingConfigurerSupport {
 	private Logger logger = LoggerFactory.getLogger(CacheAutoConfiguration.class);
+
 	/**
-	 * redis数据操作异常处理 这里的处理：在日志中打印出错误信息，但是放行
-	 * 保证redis服务器出现连接等问题的时候不影响程序的正常运行，使得能够出问题时不用缓存,继续执行业务逻辑去查询DB
-	 * 
+	 * redis数据操作异常处理
+	 * <p>
+	 * 在默认配置里面，然会的没有 CacheErrorHandler 这个bean，返回的是null，所以缓存操作失败是会抛出异常，导致整个该次请求失败。
+	 * 这里的处理：在日志中打印出错误信息，但是放行
+	 * 保证redis服务器出现连接等问题的时候不影响程序的正常运行，使得在出问题时不用缓存,可以继续执行业务逻辑去查询DB
+	 *
 	 * @return
 	 */
 	@Bean
+	@Override
 	public CacheErrorHandler errorHandler() {
-		CacheErrorHandler cacheErrorHandler = new CacheErrorHandler() {
+		return new CacheErrorHandler() {
 			@Override
 			public void handleCacheGetError(RuntimeException e, Cache cache, Object key) {
 				logger.error("redis异常：key=[{}]", key, e);
@@ -40,6 +45,5 @@ public class CacheAutoConfiguration extends CachingConfigurerSupport {
 				logger.error("redis异常：", e);
 			}
 		};
-		return cacheErrorHandler;
 	}
 }

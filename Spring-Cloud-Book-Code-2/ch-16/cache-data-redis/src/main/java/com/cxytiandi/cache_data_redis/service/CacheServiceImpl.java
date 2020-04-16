@@ -57,6 +57,7 @@ public class CacheServiceImpl implements CacheService {
 	private <K, V> String doGetCache(K key, Closure<V, K> closure, long timeout, TimeUnit timeUnit) {
 		String ret = getCache(key.toString());
 		if (ret == null) {
+			//执行回调
 			Object r = closure.execute(key);
 			setCache(key.toString(), r.toString(), timeout, timeUnit);
 			return r.toString();

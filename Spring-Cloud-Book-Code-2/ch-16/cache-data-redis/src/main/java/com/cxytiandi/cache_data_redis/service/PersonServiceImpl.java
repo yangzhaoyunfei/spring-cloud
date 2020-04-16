@@ -5,15 +5,20 @@ import org.springframework.stereotype.Service;
 
 import com.cxytiandi.cache_data_redis.po.Person;
 
+/**
+ * spring cache demo
+ */
 @Service
 public class PersonServiceImpl implements PersonService {
 	
-	@Cacheable(value = "get", key = "#id")
+	@Override
+//	@Cacheable(value = "get", key = "#id")
+	@Cacheable(value = "get", keyGenerator = "keyGenerator")
 	public Person get(String id) {
 		Person p = new Person();
 		p.setFirstname("xxx");
 		p.setLastname("bbb");
-		p.setId("111");
+		p.setId(id);
 		return p;
 	}
 	

@@ -1,8 +1,8 @@
 package com.cxytiandi.cache_data_redis.config;
 
-import java.lang.reflect.Method;
-import java.time.Duration;
-
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
@@ -17,9 +17,8 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.lang.reflect.Method;
+import java.time.Duration;
 
 @Configuration
 @EnableCaching
@@ -29,6 +28,7 @@ public class RedisConfig {
 	public CacheManager cacheManager(RedisConnectionFactory factory) {
 		RedisCacheConfiguration cacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
 				.entryTtl(Duration.ofDays(1)).disableCachingNullValues()
+				//设置序列化方式为json
 				.serializeValuesWith(RedisSerializationContext.SerializationPair
 						.fromSerializer(new GenericJackson2JsonRedisSerializer()));
 		return RedisCacheManager.builder(factory).cacheDefaults(cacheConfiguration).build();
@@ -37,6 +37,7 @@ public class RedisConfig {
 	@Bean
 	public KeyGenerator keyGenerator() {
 		return new KeyGenerator() {
+			//key -> class:method:param1:param2:...
 			@Override
 			public Object generate(Object target, Method method, Object... params) {
 				StringBuilder sb = new StringBuilder();
@@ -52,7 +53,7 @@ public class RedisConfig {
 
 	@Bean
 	public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
-		RedisTemplate<String, String> redisTemplate = new RedisTemplate<String, String>();
+		RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
 		redisTemplate.setConnectionFactory(factory);
 		redisTemplate.afterPropertiesSet();
 		setSerializer(redisTemplate);

@@ -1,8 +1,10 @@
 package com.cxytiandi.cache_data_redis.controller;
 
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
-
+import com.cxytiandi.cache_data_redis.po.Person;
+import com.cxytiandi.cache_data_redis.repository.PersonRepository;
+import com.cxytiandi.cache_data_redis.service.CacheService;
+import com.cxytiandi.cache_data_redis.service.Closure;
+import com.cxytiandi.cache_data_redis.service.PersonService;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,30 +13,25 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cxytiandi.cache_data_redis.po.Person;
-import com.cxytiandi.cache_data_redis.repository.PersonRepository;
-import com.cxytiandi.cache_data_redis.service.CacheService;
-import com.cxytiandi.cache_data_redis.service.Closure;
-import com.cxytiandi.cache_data_redis.service.PersonService;
+import java.util.Optional;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 public class CacheController {
 
 	@Autowired
+	private PersonRepository repo;
+	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
 
 	@Autowired
-	PersonRepository repo;
-
-	@Autowired
 	private PersonService personService;
-
 	@Autowired
 	private CacheService cacheService;
-
 	@Autowired
 	private RedissonClient redissonClient;
-	
+
 	@GetMapping("/lock")
 	public String lock() {
 		RLock lock = redissonClient.getLock("anyLock");
@@ -43,7 +40,11 @@ public class CacheController {
 		lock.unlock();
 		return "success";
 	}
-	
+
+
+	/**
+	 * 通过 repository 操作数据
+	 */
 	@GetMapping("/test2")
 	public void basicCrudOperations() {
 		Person person = new Person();
@@ -56,6 +57,11 @@ public class CacheController {
 		repo.delete(person);
 	}
 
+	/**
+	 * 通过 RedisTemplate 操作数据
+	 *
+	 * @return
+	 */
 	@GetMapping("/test")
 	public String test() {
 		stringRedisTemplate.opsForValue().set("key", " 猿天地 ", 1, TimeUnit.HOURS);
@@ -64,15 +70,22 @@ public class CacheController {
 		stringRedisTemplate.delete("key");
 		boolean exists = stringRedisTemplate.hasKey("key");
 		System.out.println(exists);
+		// 获取连接，手动操作
 		RedisConnection connection = stringRedisTemplate.getConnectionFactory().getConnection();
 		connection.set("name".getBytes(), "yinjihuan".getBytes());
 		System.out.println(new String(connection.get("name".getBytes())));
 		return "success";
 	}
 
+	/**
+	 * 通过 spring cache annotation 操作缓存
+	 *
+	 * @return
+	 */
 	@GetMapping("/get")
 	public Person get() {
-		return personService.get("1001");
+		String id = String.valueOf(new Random().nextInt(1000));
+		return personService.get(id);
 	}
 
 	@GetMapping("/getCallback")
@@ -82,7 +95,7 @@ public class CacheController {
 			@Override
 			public String execute(String id) {
 				// 执行你的业务逻辑
-				return id+"hello";
+				return id + "hello";
 			}
 		});
 	}
