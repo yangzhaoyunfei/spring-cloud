@@ -9,7 +9,8 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 
 /**
- * RestTemplate拦截器，传递认证的Token
+ * RestTemplate 拦截器，传递认证的Token,
+ * 如果没有使用 Feign，使用的是 RestTemplate 则使用这个
  * @author yinjihuan
  *
  */

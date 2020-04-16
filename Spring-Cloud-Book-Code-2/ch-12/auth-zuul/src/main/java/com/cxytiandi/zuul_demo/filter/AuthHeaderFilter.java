@@ -4,10 +4,9 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 
 /**
- * 调用服务前添加认证请求头过滤器
- * 
+ * 调用服务前添加认证请求头 的过滤器
+ *
  * @author yinjihuan
- * 
  **/
 public class AuthHeaderFilter extends ZuulFilter {
 	public AuthHeaderFilter() {

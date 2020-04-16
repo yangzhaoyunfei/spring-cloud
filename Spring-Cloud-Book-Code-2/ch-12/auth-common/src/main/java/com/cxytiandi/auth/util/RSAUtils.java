@@ -1,5 +1,6 @@
 package com.cxytiandi.auth.util;
 
+import javax.crypto.Cipher;
 import java.math.BigInteger;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -10,19 +11,18 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.HashMap;
-import javax.crypto.Cipher;
 
 public class RSAUtils {
-	
+
 	public static String modulus = "120749774428185480467622030722535804071445078993623309709775427878906293937338059423076695854937532244466465395164541641368876529295825453848760144835049363522545908104302024165873971414491110512342791594610742544380402908598585190494003507524195754273822268813447403290817343077571516216147839402414940310061";
-	
+
 	public static String public_exponent = "65537";
-	
+
 	public static String private_exponent = "73923469942286919561803730971048133587965873619209827001168953680477872428610977313161774128992838682156392947263251899461404460204267953359475632559803617319478756560848229397545070273747796303141458040475889804016062973476403760709402857872540300632704514872361476749953797952016730690123983122643596231873";
-	
+
 	/**
 	 * 公钥加密
-	 * 
+	 *
 	 * @param data
 	 * @param publicKey
 	 * @return
@@ -46,7 +46,7 @@ public class RSAUtils {
 
 	/**
 	 * 私钥解密
-	 * 
+	 *
 	 * @param data
 	 * @param privateKey
 	 * @return
@@ -69,13 +69,11 @@ public class RSAUtils {
 		return ming;
 	}
 
-	
-	
+
 	/**
 	 * 生成公钥和私钥
-	 * 
-	 * @throws NoSuchAlgorithmException
 	 *
+	 * @throws NoSuchAlgorithmException
 	 */
 	public static HashMap<String, Object> getKeys() throws NoSuchAlgorithmException {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -93,11 +91,9 @@ public class RSAUtils {
 	 * 使用模和指数生成RSA公钥
 	 * 注意：【此代码用了默认补位方式，为RSA/None/PKCS1Padding，不同JDK默认的补位方式可能不同，如Android默认是RSA
 	 * /None/NoPadding】
-	 * 
-	 * @param modulus
-	 *            模
-	 * @param exponent
-	 *            指数
+	 *
+	 * @param modulus  模
+	 * @param exponent 指数
 	 * @return
 	 */
 	public static RSAPublicKey getPublicKey(String modulus, String exponent) {
@@ -117,11 +113,9 @@ public class RSAUtils {
 	 * 使用模和指数生成RSA私钥
 	 * 注意：【此代码用了默认补位方式，为RSA/None/PKCS1Padding，不同JDK默认的补位方式可能不同，如Android默认是RSA
 	 * /None/NoPadding】
-	 * 
-	 * @param modulus
-	 *            模
-	 * @param exponent
-	 *            指数
+	 *
+	 * @param modulus  模
+	 * @param exponent 指数
 	 * @return
 	 */
 	public static RSAPrivateKey getPrivateKey(String modulus, String exponent) {
@@ -139,7 +133,7 @@ public class RSAUtils {
 
 	/**
 	 * 公钥加密
-	 * 
+	 *
 	 * @param data
 	 * @param publicKey
 	 * @return
@@ -162,7 +156,7 @@ public class RSAUtils {
 
 	/**
 	 * 私钥解密
-	 * 
+	 *
 	 * @param data
 	 * @param privateKey
 	 * @return
@@ -186,7 +180,6 @@ public class RSAUtils {
 
 	/**
 	 * ASCII码转BCD码
-	 * 
 	 */
 	public static byte[] ASCII_To_BCD(byte[] ascii, int asc_len) {
 		byte[] bcd = new byte[asc_len / 2];
@@ -274,7 +267,7 @@ public class RSAUtils {
 		}
 		return arrays;
 	}
-	
+
 	public static void main(String[] args) throws Exception {
 		/*HashMap<String, Object> map = RSAUtils.getKeys();
         //生成公钥和私钥
@@ -304,5 +297,5 @@ public class RSAUtils {
 		String jiami = encryptByPublicKey("yinjihuan");
 		System.out.println(jiami);
 		System.out.println(decryptByPrivateKey("2A531E49E6EE900173A04131F4C8E1AE25F5A8DF2E55E699A321DE6D4ACDAC6AB79B19E9EBF2A2EC505C34B3F6F96DCB242F7FDD0EEAD085A113B37AB74606E16A53CFD2374703D57EECEFC632C5C3FE9B25EA42907020B94DBEFCD83A30A07B1F869B035E6DFFDF18D965FC5B49AB074D1135F5D092EF5385DE384D7F695CE0"));
-    }
+	}
 }

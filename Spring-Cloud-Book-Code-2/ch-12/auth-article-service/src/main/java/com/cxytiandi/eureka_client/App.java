@@ -18,7 +18,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @date 2018-12-22
  * 
  */
-@EnableAsync
+//@EnableAsync
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableScheduling

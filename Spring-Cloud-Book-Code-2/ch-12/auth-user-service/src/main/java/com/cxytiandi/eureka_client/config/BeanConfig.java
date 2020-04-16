@@ -1,11 +1,12 @@
 package com.cxytiandi.eureka_client.config;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.cxytiandi.auth.filter.HttpBasicAuthorizeFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.cxytiandi.auth.filter.HttpBasicAuthorizeFilter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 public class BeanConfig {
@@ -20,5 +21,4 @@ public class BeanConfig {
 		registrationBean.setUrlPatterns(urlPatterns);
 		return registrationBean;
 	}
-	
 }
