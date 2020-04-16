@@ -6,6 +6,7 @@ import com.cxytiandi.cache_data_redis.service.CacheService;
 import com.cxytiandi.cache_data_redis.service.Closure;
 import com.cxytiandi.cache_data_redis.service.PersonService;
 import org.redisson.api.RLock;
+import org.redisson.api.RSemaphore;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnection;
@@ -43,6 +44,13 @@ public class CacheController {
 		lock.lock(10, TimeUnit.SECONDS);
 		System.out.println("-----");
 		lock.unlock();
+		/*if (false) {
+			// https://github.com/redisson/redisson/wiki/Redisson%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D
+			RSemaphore semaphore = redissonClient.getSemaphore("semaphore");
+			semaphore.trySetPermits(10);
+			semaphore.acquire();
+			semaphore.release();
+		}*/
 		return "success";
 	}
 
