@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 /**
- * Zuul整合Swagger示列
+ * Zuul聚合多个Swagger示列
  * 
  * @author yinjihuan
  * 

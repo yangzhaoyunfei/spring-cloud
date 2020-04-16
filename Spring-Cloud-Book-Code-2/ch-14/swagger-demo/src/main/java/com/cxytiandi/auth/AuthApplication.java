@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 import com.spring4all.swagger.EnableSwagger2Doc;
-
+//https://github.com/SpringForAll/spring-boot-starter-swagger
 @EnableDiscoveryClient
 @EnableSwagger2Doc
 @SpringBootApplication

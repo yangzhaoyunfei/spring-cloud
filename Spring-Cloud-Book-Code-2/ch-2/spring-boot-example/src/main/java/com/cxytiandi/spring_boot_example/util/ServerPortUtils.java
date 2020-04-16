@@ -19,7 +19,7 @@ public class ServerPortUtils {
         int min = 2000;
         Random random = new Random();
         int port = random.nextInt(max)%(max-min+1) + min;
-        boolean using = NetUtils.isLoclePortUsing(port);
+        boolean using = NetUtils.isLocalPortUsing(port);
         if (using) {
             return getAvailablePort();
         } else {

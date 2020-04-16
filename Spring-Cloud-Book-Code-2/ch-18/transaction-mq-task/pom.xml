@@ -26,6 +26,7 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
         <dependency>
+<!--从消息服务查询消息，以发送到mq-->
 			<groupId>com.fangjia</groupId>
 			<artifactId>transaction-mq-client</artifactId>
 			<version>1.0</version>

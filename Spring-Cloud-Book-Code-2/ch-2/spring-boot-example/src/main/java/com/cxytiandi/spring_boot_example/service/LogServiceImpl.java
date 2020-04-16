@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class LogServiceImpl implements LogService {
 
-	@Async
-	public void saveLog() {
-		System.out.println(Thread.currentThread().getName());
-	}
+    @Async
+    @Override
+    public void saveLog() {
+        System.out.println(Thread.currentThread().getName());
+    }
 
 }

@@ -12,10 +12,10 @@ public class BeanConfig {
 
 	@Bean
 	public FilterRegistrationBean<HttpBasicAuthorizeFilter> filterRegistrationBean() {
-		FilterRegistrationBean<HttpBasicAuthorizeFilter> registrationBean = new FilterRegistrationBean<HttpBasicAuthorizeFilter>();
+		FilterRegistrationBean<HttpBasicAuthorizeFilter> registrationBean = new FilterRegistrationBean<>();
 		HttpBasicAuthorizeFilter httpBasicFilter = new HttpBasicAuthorizeFilter();
 		registrationBean.setFilter(httpBasicFilter);
-		List<String> urlPatterns = new ArrayList<String>(1);
+		List<String> urlPatterns = new ArrayList<>(1);
 		urlPatterns.add("/*");
 		registrationBean.setUrlPatterns(urlPatterns);
 		return registrationBean;

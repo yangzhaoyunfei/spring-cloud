@@ -43,7 +43,7 @@ public class TransactionMessageController {
 
 	/**
 	 * 批量发送消息，只存储到消息表中，发送逻辑有具体的发送线程执行
-	 * @param message  消息内容
+	 * @param messages  消息内容
 	 * @return true 成功 | false 失败
 	 */
 	@PostMapping("/sends")

@@ -3,6 +3,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +63,7 @@ public class ServiceConsumerFallbackProvider implements FallbackProvider {
 			@Override
 			public HttpHeaders getHeaders() {
 				HttpHeaders headers = new HttpHeaders();
-				MediaType mt = new MediaType("application", "json", Charset.forName("UTF-8"));
+				MediaType mt = new MediaType("application", "json", StandardCharsets.UTF_8);
 				headers.setContentType(mt);
 				return headers;
 			}

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ImportResource;
 /**
  * 分库又分表示列
  * @author  yinjihuan
- *
+ *	文档：https://shardingsphere.apache.org/document/current/cn/overview/
  */
 @SpringBootApplication
 @ImportResource(locations = { "classpath:sharding.xml" })

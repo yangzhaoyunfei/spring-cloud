@@ -19,6 +19,7 @@ public class AsyncTaskExecutePool implements AsyncConfigurer {
 	@Autowired
 	private TaskThreadPoolConfig config;
 
+	@Override
 	public Executor getAsyncExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 		executor.setCorePoolSize(config.getCorePoolSize());
@@ -31,9 +32,11 @@ public class AsyncTaskExecutePool implements AsyncConfigurer {
 		return executor;
 	}
 
+	@Override
 	public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
 		// 异步任务中异常处理
 		return new AsyncUncaughtExceptionHandler() {
+			@Override
 			public void handleUncaughtException(Throwable arg0, Method arg1, Object... arg2) {
 
 				logger.error("==========================" + arg0.getMessage() + "=======================", arg0);

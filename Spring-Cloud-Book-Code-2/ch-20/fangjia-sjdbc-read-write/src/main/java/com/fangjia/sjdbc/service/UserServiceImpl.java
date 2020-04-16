@@ -10,13 +10,11 @@ import com.fangjia.sjdbc.po.User;
 
 @Service
 public class UserServiceImpl extends EntityService<User> implements UserService {
-	
 	public List<User> list() {
 		// 强制路由主库
 		HintManager.getInstance().setMasterRouteOnly();
 		return super.list();
 	}
-
 	public Long add(User user) {
 		return (Long) super.save(user);
 	}

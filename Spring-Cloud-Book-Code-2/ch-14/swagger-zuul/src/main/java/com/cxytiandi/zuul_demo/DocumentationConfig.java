@@ -11,7 +11,7 @@ import springfox.documentation.swagger.web.SwaggerResource;
 import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@EnableSwagger2
+@EnableSwagger2//也可以改用starter
 @Component
 @Primary
 public class DocumentationConfig implements SwaggerResourcesProvider {
