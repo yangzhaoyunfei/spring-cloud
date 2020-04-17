@@ -46,7 +46,7 @@ public class DingDingMessageUtil {
 		}
 	}
 	public static void main(String[] args){
-		DingDingMessageUtil.sendTextMessage("hello");
+//		DingDingMessageUtil.sendTextMessage("hello");
 	}
 }
 

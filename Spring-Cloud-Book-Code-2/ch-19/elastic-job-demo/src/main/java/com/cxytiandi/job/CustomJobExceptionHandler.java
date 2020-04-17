@@ -16,7 +16,7 @@ public class CustomJobExceptionHandler implements JobExceptionHandler {
     @Override
     public void handleException(String jobName, Throwable cause) {
         logger.error(String.format("Job '%s' exception occur in job processing", jobName), cause);
-        DingDingMessageUtil.sendTextMessage("【"+jobName+"】任务异常。" + cause.getMessage());
+//        DingDingMessageUtil.sendTextMessage("【"+jobName+"】任务异常。" + cause.getMessage());
     }
 
 }

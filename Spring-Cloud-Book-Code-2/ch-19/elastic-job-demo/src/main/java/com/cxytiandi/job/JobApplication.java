@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ImportResource;
 
 /**
  * Elastic Job XML配置示列
- * 
+ *  http://elasticjob.io/docs/elastic-job-lite/00-overview/
  * @author yinjihuan
  * 
  * @about http://cxytiandi.com/about

@@ -16,14 +16,14 @@ public class MessageElasticJobListener implements ElasticJobListener {
     public void beforeJobExecuted(ShardingContexts shardingContexts) {
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         String msg = date + " 【猿天地-" + shardingContexts.getJobName() + "】任务开始执行====" + JsonUtils.toJson(shardingContexts);
-        DingDingMessageUtil.sendTextMessage(msg);
+//        DingDingMessageUtil.sendTextMessage(msg);
     }
 
     @Override
     public void afterJobExecuted(ShardingContexts shardingContexts) {
     	String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         String msg = date + " 【猿天地-" + shardingContexts.getJobName() + "】任务执行结束====" + JsonUtils.toJson(shardingContexts);
-        DingDingMessageUtil.sendTextMessage(msg);
+//        DingDingMessageUtil.sendTextMessage(msg);
     }
 
 }
